@@ -1,0 +1,35 @@
+{% extends 'cover.html' %} {% block content %}
+
+<div class="centerDiv" style="background-color: rgb(98, 75, 109);">
+    <div class="row-sm-1">
+        <div class="col-sm" style="padding: 2% 2%; text-align: center;">
+            <h1>KidoTodo App</h1>
+            <br>
+            <img src="{{ url_for('static', filename='images/icon1.png') }}" width="200" alt="">
+            <br>
+        </div>
+        <div class="col-sm" style="padding: 2% 5% 0 2%;">
+            <br><br><br><br><br><br>
+            <h1>Sign In</h1><br>
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email:</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Enter email" />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password:</label>
+                    <input type="password" name="passwd" class="form-control" id="exampleInputPassword1"
+                        placeholder="Password" />
+                </div><br>
+                <p class="warning">{{ message }}</p>
+                <button class="btn btn-info" type="submit">Sign in</button><br><br>
+                <span id="passwordHelpBlock" class="help-block">Forgot Password?  <a href="{{url_for('.forgotPassword') }}">Reset it here >></a></span>
+            </form>
+            <br/>
+            <p>Create a new account! <a href="/signup">Sign up</a></p>
+            <br><br><br>
+        </div>
+    </div>
+</div>
+{% endblock %}

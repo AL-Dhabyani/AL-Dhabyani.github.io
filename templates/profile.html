@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/progress.css') }}" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+ integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+ crossorigin="anonymous"></script>
+
+<h2 class="text-center">Kido Profile 📑</h2><hr><br>
+<br><br>
+<div class="row">
+    <div class="col-lg-2">
+        <img class="profile-image" src="https://cdn5.vectorstock.com/i/thumb-large/20/44/laughing-boy-avatar-funny-kid-profile-picture-vector-41562044.jpg"
+            alt="profile-pic">
+    </div>
+    <div style="padding: 0 2%;" class="col-lg-7">
+        <h1>
+            {{ user['name'] }}
+        </h1>
+        <p>Kido email : <em>
+                {{ user['email'] }}
+            </em> </p>
+        <button style="margin-right: 2%;" data-toggle="modal" data-target="#changePassword" aria-haspopup="true"
+            class="btn btn-sm btn-primary">Change Password</button>
+        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteAccount"
+            aria-haspopup="true">Delete Account</button>
+        <br><br>
+    </div>
+</div>
+
+<div class="container">
+    <div class="modal fade bg-dark" id="changePassword">
+        <div class="modal-dialog" style="color: rgb(255, 255, 255);">
+            <div class="modal-content" style="background-color: rgb(26, 24, 51);">
+                <div class="modal-header text-center">
+                    <h3 class="modal-title text-center">Change Password</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/updatePassword" method="post">
+                        <br>
+                        <input class="form-control" placeholder="Old password" type="password" name="oldpasswd"
+                            id="oldpasswd" required><br>
+                        <input id="newpasswd" class="form-control" type="password" name="newpasswd"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                            placeholder="New password" required /> <br>
+                        <input class="form-control" type="password" name="confirm_passwd"
+                            placeholder="Confirm new passowrd" id="confirm-passwd" required />
+                        <br><br>
+                        <button class="btn btn-sm btn-primary" type="submit">Yes, Change my password.</button>
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="modal fade bg-dark" id="deleteAccount">
+        <div class="modal-dialog" style="color: rgb(255, 255, 255);">
+            <div class="modal-content" style="background-color: rgb(26, 24, 51);">
+
+                <div class="modal-header text-center">
+                    <h3 class="modal-title text-center">Delete Account</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-1-button" action="/deleteAccount" method="post">
+                        <input class="form-control" type="password" name="passwd" placeholder="Enter password" required>
+                        <br><br>
+                        <p>Are you sure to delete your account?</p>
+                        <button class="btn btn-sm btn-primary">Yes, delete my account.</button>
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br>
+
+<br><br>
+<h2 class="text-center">Progress 📈</h2><hr><br>
+<br>
+
+<div class="row">
+    <div class="col-lg-3">
+        <p style="font-size: larger;">Completed tasks</p>
+        <h1>{{ user['completed'] }}</h1>
+        <p style="font-size: larger;">Tasks to be completed</p>
+        <h1>{{ user['rem_tasks'] }}</h1>
+    </div>
+    <div class="col-lg-4">
+        <br>
+        <div class="progress" data-percentage="{{ user['percent'] }}">
+            <span class="progress-left">
+                <span class="progress-bar"></span>
+            </span>
+            <span class="progress-right">
+                <span class="progress-bar"></span>
+            </span>
+            <div class="progress-value">
+                <div>
+                    {{ user['percent'] }}%<br>
+                    <span>completed</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var password = document.getElementById("newpasswd"),
+        confirm_password = document.getElementById("confirm-passwd");
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords don't Match");
+        } else {
+            confirm_password.setCustomValidity("");
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
+</script>
+
+{% endblock %}

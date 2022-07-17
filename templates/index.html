@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="card bg-dark" style="padding: 5%">
+    <div class="card-body"  style= "background: rgb(143, 122, 180);
+    background: radial-gradient(circle, rgba(78, 64, 100, 0.499) 0%, rgb(92, 99, 112) 91%);">
+
+        <h2><span id="greeting"></span>, {{ user }}!</h2>
+        <br>
+        <h3>My Tasks </h3><hr/>
+        <br>
+        <div id="tasks-section">
+        
+            {% for task in tasks %}
+            <div class="checkbox-animated">
+                <input class="checkbox-input" id="{{ task['_id'] }}" type="checkbox">
+                <label for="{{ task['_id'] }}">
+                    <span class="check"></span>
+                    <span class="box"></span>
+                    {{ task['content'] }}
+                </label>
+            </div>
+            {% endfor %}
+        
+        </div>
+        
+        <div id="my-form" class="form" style="display: none;">
+            <div class="form-group row">
+                <div class="col-lg-8">
+                <input type="text" name="newTask" class="form-control" id="newTask" placeholder="Enter your task" required><br>
+                <button id="task-add-button" style="margin-right: 1%;" class="btn btn-dark">Add task</button>
+                <button style="margin-right: 1%;" class="btn btn-danger" onclick="hideForm()"><i
+                        ></i>Cancel</button>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div style="display: none;" id="no-task-indicator"><span style="font-size: larger;">No tasks 🥳</span></div>
+        
+        <br><br>
+        <button class="task-buttons btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Add a new task"
+            onclick="showForm()"><i class="fas fa-plus"></i></button>
+        <button class="task-buttons btn" style="background-color:rgb(120, 31, 221);color: #fff;" data-toggle="tooltip"
+            data-placement="bottom" title="Mark all as done" onclick="clearAllTasks()"><i class="fas fa-check"></i></button>
+        <br><br>
+
+    </div>
+   
+</div>
+
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="card bg-dark">
+    <div class="card-body"  style= "background: rgb(143, 122, 180);
+    background: radial-gradient(circle, rgba(78, 64, 100, 0.499) 0%, rgb(92, 99, 112) 91%);">
+
+        <h2>Completed tasks</h2><hr>
+        <br>
+        <button class="task-buttons-absolute btn btn-warning" data-toggle="tooltip" data-placement="top"
+            title="Delete all finished tasks" onclick="deleteTasks()"><i class="far fa-trash-alt"></i></button><br>
+
+
+        <button class="task-buttons-absolute btn btn-info" style="right: 20%;" data-toggle="tooltip" data-placement="top"
+            title="Redo all tasks" onclick="redoTasks()"><i class="fas fa-redo-alt"></i></button>
+        <br>
+        <div id="tasks-section">
+            {% for task in tasks %}
+            <div class="checkbox-animated">
+                <input class="checkbox-input" id="{{ task['_id'] }}" type="checkbox" checked disabled>
+                <label for="{{ task['_id'] }}">
+                    <span class="check"></span>
+                    <span class="box"></span>
+                    {{ task['content'] }}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        <div style="display: none;" id="no-task-indicator"><span style="font-size: larger;">Hey Kido, Your completed tasks appear
+                here 😁</span></div>
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/finished.js') }}"></script>
+
+{% endblock %}

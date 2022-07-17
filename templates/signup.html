@@ -1,0 +1,72 @@
+{% extends 'cover.html' %} {% block content %}
+
+<div class="centerDiv" style="background-color: rgb(98, 75, 109);">
+    <div class="row-lg-1">
+        <div class="col-sm" style="padding: 2% 2%; text-align: center;">
+<h1>KidoTodo App</h1>
+            <br>
+            <img src="{{ url_for('static', filename='images/icon1.png') }}" width="200" alt="">
+            <br>
+        </div>
+        <div class="col-sm" style="padding: 2% 5% 0 2%;">
+
+            <form action="/signup" method="post">
+                <div class="form-group"><br><br><br><br>
+                    <br><br>
+                    <h1>Sign Up</h1>
+                    <br>
+                    <div class="text-align"><p>Please Insert Your Details: </p></div>
+                    <div class="form-group">
+                        <label for="firstname">First Name:</label>
+                        <input type="text" name="firstnme" class="form-control" id="firstname" placeholder="Enter First Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last Name:</label>
+                        <input type="text" name="lastnme" class="form-control" id="lastname" placeholder="Enter Last Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" name="usrname" class="form-control" id="username" placeholder="Enter username" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email:</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter email" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password:</label>
+                        <input type="password" name="passwd" class="form-control" id="exampleInputPassword1"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                            placeholder="Password" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputCpasswd">Confirm Password:</label>
+                        <input class="form-control" type="password" name="Cpasswd"
+                        placeholder="Confirm passowrd" id="confirm-passwd1" required />
+                    </div><br>
+                <p class="warning">{{ message }}</p>
+                <button class="btn btn-info" type="submit">Sign up</button> 
+            </form>
+            <br /><br>
+            <p>Already a user? <a href="/login">Sign in</a></p>
+            <br><br><br>
+        </div>
+    </div>
+</div>
+
+<script>
+    var password = document.getElementById("exampleInputPassword1"),
+        confirm_password = document.getElementById("confirm-passwd1");
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords don't Match");
+        } else {
+            confirm_password.setCustomValidity("");
+        }
+    }
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+
+{% endblock %}

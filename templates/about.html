@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+
+<div id="about-section">
+    <h2>About <strong>KiDoToDo</strong></h2>
+    <br>
+    <img src="{{ url_for('static', filename='images/icon1.png') }}" width="200" alt="">
+    <br><br><br>
+    <h5><strong>KiDoToDo</strong> is an app built in order to manage day-to-day activities and tasks</h5><br>
+    <p><strong>What is to-do list?</strong><br>
+        They list everything that you have to do, with the most important tasks at the top of the list, and the least important tasks at the bottom. By keeping such a list, 
+        you make sure that your tasks are written down all in one place so you don't forget anything important.</p>
+    <br>
+    <p>Done with ❤ by AL-Dhabyani</p>
+    <br>
+
+    <div>
+        <a class="btn btn-square btn-info me-2" href="https://www.instagram.com/al.dabyani/"><i class="fab fa-instagram"></i></a>
+        <a class="btn btn-square btn-info me-2" href="https://www.linkedin.com/in/mohammed-al-dhabyani-762549244/"><i class="fab fa-linkedin fa-lg"></i></a>
+        <a class="btn btn-square btn-info me-2" href="https://github.com/AL-Dhabyani"><i class="fab fa-github fa-lg"></i></a>
+
+    </div>
+                    
+    <br>
+        <footer>© 2022 AL-Dhabyani</footer>
+    </div>
+{% endblock %}
