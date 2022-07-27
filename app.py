@@ -24,8 +24,7 @@ def string_hash(text):
 
 def register_auth_user(user_name, user_firstname, user_lastname, user_password, user_email):
 
-    client = pymongo.MongoClient(MONGO_HOST_URL, username=MONGO_USER_NAME, password=MONGO_USER_PWD)
-    db = client[MONGO_DATABASE_NAME]
+    
 
     auth_users_col = db['auth_user']
     if auth_users_col.count_documents({'email': user_email}):
@@ -53,8 +52,7 @@ def register_auth_user(user_name, user_firstname, user_lastname, user_password, 
 
 def check_auth_login(user_email, user_password):
     
-    client = pymongo.MongoClient(MONGO_HOST_URL, username=MONGO_USER_NAME, password=MONGO_USER_PWD)
-    db = client[MONGO_DATABASE_NAME]
+    
 
     auth_users_col = db['auth_user']
     search_data = {'email': user_email, 'password': user_password}
@@ -79,8 +77,7 @@ def verify_usr_eml(key):
     search_data = {
         'key': key,
     }
-    client = pymongo.MongoClient(MONGO_HOST_URL, username=MONGO_USER_NAME, password=MONGO_USER_PWD)
-    db = client[MONGO_DATABASE_NAME]
+    
 
     verify_usr_eml_col = db['verify_usr_eml']
     auth_user_col = db['auth_user']
